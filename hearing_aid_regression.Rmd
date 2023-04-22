@@ -1,5 +1,5 @@
 ---
-title: "pai"
+title: "Modeling Hearing Aids"
 author: "LA"
 date: "2022-11-29"
 output: html_document
@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#GENERALIZED LOGIT FOR NOMINAL RESPONSE
+#GENERALIZED LOGIT FOR NOMINAL RESPONSE Model
 ```{r}
 
 hear <- read.csv(".../hear_aids.csv")
@@ -26,6 +26,8 @@ summary(null.model <- multinom(Style ~ 1, data=hear))
 print(deviance <- deviance(null.model)-deviance(fitted.model))
 
 print(p_value <- pchisq(deviance, df=15, lower.tail=FALSE))
+
+# Predicting the following
 
 print(predict(fitted.model, data.frame(Bluetooth.r="Yes", Rechargable.r="Yes",Warranty_Years=2, Price=7500,OTC.r="No"),type="prob"))
 
