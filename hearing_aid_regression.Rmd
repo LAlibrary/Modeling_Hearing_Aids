@@ -1,0 +1,43 @@
+---
+title: "pai"
+author: "LA"
+date: "2022-11-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#GENERALIZED LOGIT FOR NOMINAL RESPONSE
+```{r}
+
+hear <- read.csv("C:/Users/lynet/OneDrive/Desktop/HearingAidProject/hear_aids.csv")
+
+Style.r <- relevel(as.factor(hear$Style),ref="BTE")
+Bluetooth.r <- relevel(as.factor(hear$Bluetooth),ref="Yes")
+Rechargable.r <-relevel(as.factor(hear$Rechargable),ref="No")
+OTC.r <- relevel(as.factor(hear$OTC),ref="Yes")
+
+library(nnet)
+summary(fitted.model <- multinom(Style.r ~ Bluetooth.r + Rechargable.r + Warranty_Years + Price + OTC.r, data=hear))
+
+summary(null.model <- multinom(Style ~ 1, data=hear))
+print(deviance <- deviance(null.model)-deviance(fitted.model))
+
+print(p_value <- pchisq(deviance, df=15, lower.tail=FALSE))
+
+print(predict(fitted.model, data.frame(Bluetooth.r="Yes", Rechargable.r="Yes",Warranty_Years=2, Price=7500,OTC.r="No"),type="prob"))
+
+#CIC model has the highest probability and this makes sense because it is often most expensive and is more customized, having a longer warranty as well
+
+#Visualization 
+
+library(ggplot2)
+
+ggplot(data=hear, mapping=aes(x=Style,y=Price, color=Style))+geom_boxplot()
+
+
+
+
+```
