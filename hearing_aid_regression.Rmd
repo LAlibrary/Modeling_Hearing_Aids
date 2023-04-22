@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #GENERALIZED LOGIT FOR NOMINAL RESPONSE
 ```{r}
 
-hear <- read.csv("C:/Users/lynet/OneDrive/Desktop/HearingAidProject/hear_aids.csv")
+hear <- read.csv(".../hear_aids.csv")
 
 Style.r <- relevel(as.factor(hear$Style),ref="BTE")
 Bluetooth.r <- relevel(as.factor(hear$Bluetooth),ref="Yes")
