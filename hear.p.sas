@@ -1,4 +1,4 @@
-proc import out=hear datafile="C:/Users/lynet/OneDrive/Desktop/HearingAidProject/hear_aids.csv"
+proc import out=hear datafile=".../hear_aids.csv"
 dbms=csv replace;
 run;
 
